@@ -1,16 +1,24 @@
-#![allow(unused)]
-
 use clap::Parser;
+use std::process::Command;
 
-/// Search for a pattern in a file and display the lines that contain it.
 #[derive(Parser)]
-struct Cli {
-    /// message to pass to the terminal
-    message: String,
+struct Args {
+    command: String,
 }
 
 fn main() {
-    let args = Cli::parse();
+    let args = Args::parse();
 
-    println!("{}", &args.message);
+    let mut git_arg = "--".to_owned();
+    git_arg.push_str(&args.command);
+
+    let command = 
+        match Command::new("git")
+            .arg(git_arg)
+            .output() {
+                Ok(val) => val,
+                Err(e) => panic!("Error: {}", e),
+            };
+
+    println!("{}", String::from_utf8_lossy(&command.stdout));
 }
