@@ -1,4 +1,5 @@
 mod git_command_inquire;
+mod help_command_inquire;
 
 use inquire::Select;
 
@@ -21,7 +22,7 @@ fn match_setup_config_category(category: &str) {
     match category {
         "git" => git_command_inquire::git_command_inquire(),
         // "config" => config_command_inquire(),
-        // "help" => help_command_inquire(),
+        "help" => help_command_inquire::help_command_inquire(),
         // "bugreport" => bugreport_command_inquire(),
         &_ => todo!(),
     };
