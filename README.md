@@ -1,5 +1,5 @@
 # gust
-A git helper built with rust
+A git cli wizard built with rust
 
 Phase 1:
 Create a rust CLI tool for assisting in git functionality
