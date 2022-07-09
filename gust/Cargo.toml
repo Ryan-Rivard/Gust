@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 clap = { version = "3.0", features = ["derive"] }
 inquire = "0.2.1"
+linked-hash-map = "0.5.6"

@@ -1,4 +1,6 @@
-mod git_category_inquire;
+mod git_stuff;
+mod prompter;
+mod executor;
 
 use clap::Parser;
 
@@ -10,12 +12,19 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    match args.command {
-        Some(command) => specific_thread(command),
-        None => git_category_inquire::git_category_inquire(),
-    }
+    let command = get_git_category_commands();
+
+    executor::execute_git_command(vec![command]);
 
     println!("Pleasure doing business with you.");
+}
+
+fn get_git_category_commands() -> &'static str{
+
+    let message = git_stuff::get_message();
+    let options = git_stuff::get_options();
+    let selection = prompter::prompt_selection(message, options);
+    return git_stuff::process_selections(selection)
 }
 
 fn specific_thread(command: String) {
@@ -23,3 +32,4 @@ fn specific_thread(command: String) {
         println!("Starting up Gust - we should check config options");
     }
 }
+
